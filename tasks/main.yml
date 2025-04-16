@@ -13,9 +13,11 @@
     timeout: 30
   register: api_result
   no_log: false
-  # Add retry for network issues
   retries: 3
   delay: 5
+  loop: "{{ wordpress_sites | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
 
 - name: Display API response (only in verbose mode)
   debug:
