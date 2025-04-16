@@ -8,7 +8,7 @@
     body_format: json
     body:
       ip: "{{ ansible_host }}"
-      url: "https://{{ site }}"
+      url: "https://{{ item.key }}"
     status_code: 200,201,202,204
     timeout: 30
   register: api_result
