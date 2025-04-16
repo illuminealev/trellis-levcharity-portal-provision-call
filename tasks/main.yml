@@ -12,7 +12,7 @@
     status_code: 200,201,202,204
     timeout: 30
   register: api_result
-  no_log: true
+  no_log: false
   # Add retry for network issues
   retries: 3
   delay: 5
