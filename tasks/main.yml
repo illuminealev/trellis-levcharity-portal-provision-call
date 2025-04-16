@@ -1,4 +1,9 @@
 ---
+- name: Get current server time
+  shell: date "+%Y-%m-%d %H:%M:%S"
+  register: server_time
+  changed_when: false
+
 - name: Provision call to Levcharity Portal API
   uri:
     url: "https://portal.levcharity.com/api/v1/provision"
@@ -9,7 +14,7 @@
     body:
       ip: "{{ ansible_host }}"
       url: "https://{{ item.key }}"
-      updated_at: "{{ '%Y-%m-%d %H:%M:%S' | strftime }}"
+      updated_at: "{{ server_time.stdout }}"
     status_code: 200,201,202,204
     timeout: 30
   register: api_result
