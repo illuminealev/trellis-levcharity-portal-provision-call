@@ -9,6 +9,7 @@
     body:
       ip: "{{ ansible_host }}"
       url: "https://{{ item.key }}"
+      updated_at: "{{ '%Y-%m-%d %H:%M:%S' | strftime }}"
     status_code: 200,201,202,204
     timeout: 30
   register: api_result
