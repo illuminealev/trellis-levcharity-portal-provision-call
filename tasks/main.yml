@@ -16,7 +16,6 @@
   # Add retry for network issues
   retries: 3
   delay: 5
-  when: current_release is defined  # Skip if critical data is missing
 
 - name: Display API response (only in verbose mode)
   debug:
