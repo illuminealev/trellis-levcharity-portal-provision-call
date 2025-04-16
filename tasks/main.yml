@@ -1,0 +1,24 @@
+---
+- name: Provision call to Levcharity Portal API
+  uri:
+    url: "https://portal.levcharity.com/api/v1/provision"
+    method: POST
+    headers:
+      Content-Type: "application/json"
+    body_format: json
+    body:
+      ip: "{{ ansible_host }}"
+      url: "https://{{ site }}"
+    status_code: 200,201,202,204
+    timeout: 30
+  register: api_result
+  no_log: true
+  # Add retry for network issues
+  retries: 3
+  delay: 5
+  when: current_release is defined  # Skip if critical data is missing
+
+- name: Display API response (only in verbose mode)
+  debug:
+    var: api_result
+    verbosity: 1
